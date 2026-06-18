@@ -1244,6 +1244,195 @@
       transition: opacity 0.15s ease-out;
       z-index: 3;
     }
+
+    /* ============================================================
+       EXPERIENCE SECTION (HARDWARE / PCB TIMELINE)
+       ============================================================ */
+    #experience {
+      position: relative;
+      z-index: 5;
+      border-top-left-radius: 40px;
+      border-top-right-radius: 40px;
+      box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.35);
+      background-color: #0a0a0c;
+      background-image: 
+        radial-gradient(circle at top, rgba(249, 115, 22, 0.08), transparent 60%),
+        radial-gradient(rgba(255, 255, 255, 0.03) 1.5px, transparent 1.5px);
+      background-size: 100% 100%, 24px 24px;
+      background-position: center top, 0 0;
+      color: #ffffff;
+      padding: 6rem clamp(1.5rem, 5vw, 6rem) 10rem clamp(1.5rem, 5vw, 6rem);
+    }
+
+    .experience-header {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto 5rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .experience-label {
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: #ff6b2b;
+    }
+
+    .experience-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      letter-spacing: 0.03em;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .timeline-container {
+      position: relative;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateX(-50%);
+      overflow: hidden;
+    }
+
+    .timeline-line-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(to bottom, #ff6b2b, #ffb347);
+      box-shadow: 0 0 10px #ff6b2b, 0 0 20px #ffb347;
+    }
+
+    .timeline-items {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+
+    .timeline-item {
+      position: relative;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .timeline-item.left-item {
+      align-self: flex-start;
+      padding-right: 3.5rem;
+      text-align: right;
+      align-items: flex-end;
+    }
+
+    .timeline-item.right-item {
+      align-self: flex-end;
+      padding-left: 3.5rem;
+      text-align: left;
+      align-items: flex-start;
+    }
+
+    .timeline-node {
+      position: absolute;
+      top: 2.2rem;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #110f13;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      z-index: 10;
+      transition: background-color 0.4s, border-color 0.4s, box-shadow 0.4s;
+    }
+
+    .timeline-item.left-item .timeline-node {
+      right: -9px;
+    }
+
+    .timeline-item.right-item .timeline-node {
+      left: -9px;
+    }
+
+    .timeline-content {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(18, 16, 20, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 107, 43, 0.08);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      transition: border-color 0.3s, transform 0.3s;
+      will-change: transform, opacity;
+    }
+
+    .timeline-content:hover {
+      border-color: rgba(255, 107, 43, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .timeline-date {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #ff6b2b;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-role {
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .timeline-details {
+      font-size: clamp(0.88rem, 1.5vw, 0.96rem);
+      line-height: 1.6;
+      color: #a0a0a8;
+    }
+
+    /* Responsive Timeline Styles */
+    @media (max-width: 768px) {
+      .timeline-line {
+        left: 20px;
+        transform: none;
+      }
+
+      .timeline-item {
+        width: 100%;
+        align-self: flex-start !important;
+        padding-left: 3.5rem !important;
+        padding-right: 0 !important;
+        text-align: left !important;
+        align-items: flex-start !important;
+      }
+
+      .timeline-node {
+        left: 11px !important;
+        right: auto !important;
+      }
+
+      .timeline-content {
+        max-width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2095,6 +2284,64 @@
   </div>
 </section>
 
+<!-- ============================================================
+     EXPERIENCE / JOURNEY SECTION
+============================================================ -->
+<section id="experience" aria-label="Professional Experience">
+  <div class="experience-header">
+    <span class="experience-label">My Journey</span>
+    <h2 class="experience-title">EXPERIENCE</h2>
+  </div>
+
+  <div class="timeline-container">
+    <!-- The vertical timeline line -->
+    <div class="timeline-line">
+      <div class="timeline-line-inner"></div>
+    </div>
+
+    <!-- Timeline items -->
+    <div class="timeline-items">
+      
+      <!-- Item 1: AUTONIX -->
+      <div class="timeline-item left-item" id="exp-item-1">
+        <div class="timeline-node"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2025 – PRESENT</span>
+          <h3 class="timeline-role">Team Lead - AUTONIX</h3>
+          <p class="timeline-details">
+            Leading the development of AUTONIX, an autonomous rescue rover. Architected phase-by-phase execution using ROS, Ubuntu, and acoustic fire suppression technology.
+          </p>
+        </div>
+      </div>
+
+      <!-- Item 2: Cloud Computing -->
+      <div class="timeline-item right-item" id="exp-item-2">
+        <div class="timeline-node"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2025 – PRESENT</span>
+          <h3 class="timeline-role">Cloud Computing Enthusiast &amp; Developer</h3>
+          <p class="timeline-details">
+            Expanding cloud architecture expertise across multi-cloud platforms. Actively practicing AWS and Microsoft Azure, while having completed the Google Cloud Study Jams (Cohort 2) with 19 skill badges. Also engineered 'DocuMind', an AI study assistant for HackSprint 2025.
+          </p>
+        </div>
+      </div>
+
+      <!-- Item 3: CECP Club -->
+      <div class="timeline-item left-item" id="exp-item-3">
+        <div class="timeline-node"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2024 – PRESENT</span>
+          <h3 class="timeline-role">Active Member - CECP Club</h3>
+          <p class="timeline-details">
+            Actively contributing to technical initiatives, hardware/software collaborations, and overall community growth within the college's core technical club at RIT Roorkee.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
 <!-- ============================================================
      SCRIPTS — Three.js + GSAP via CDN (ESM)
@@ -2426,6 +2673,62 @@ setInterval(updateClock, 1000);
         ease: 'none'
       });
     }
+  });
+})();
+
+/* ============================================================
+   EXPERIENCE SECTION — TIMELINE SCROLL TRIGGER
+   ============================================================ */
+(function initExperienceTimeline() {
+  const container = document.querySelector('.timeline-container');
+  if (!container) return;
+
+  const lineInner = container.querySelector('.timeline-line-inner');
+  const items = container.querySelectorAll('.timeline-item');
+
+  // 1. Animate the line drawing down
+  gsap.to(lineInner, {
+    scrollTrigger: {
+      trigger: container,
+      start: 'top 70%',
+      end: 'bottom 80%',
+      scrub: true,
+    },
+    height: '100%',
+    ease: 'none'
+  });
+
+  // 2. Animate items (node lights up, card fades + slides in)
+  items.forEach((item, index) => {
+    const node = item.querySelector('.timeline-node');
+    const content = item.querySelector('.timeline-content');
+    const isLeft = item.classList.contains('left-item');
+    const directionX = isLeft ? -40 : 40;
+
+    // Set initial state for card
+    gsap.set(content, { opacity: 0, x: directionX });
+
+    // Animate node and card together when the scroll reaches the item
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 75%',
+        toggleActions: 'play none none none',
+      }
+    })
+    .to(node, {
+      backgroundColor: '#ff6b2b',
+      borderColor: '#ffb347',
+      boxShadow: '0 0 12px #ff6b2b, 0 0 24px rgba(255, 107, 43, 0.6)',
+      duration: 0.3,
+      ease: 'power1.out'
+    })
+    .to(content, {
+      opacity: 1,
+      x: 0,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, '-=0.15');
   });
 })();
 
