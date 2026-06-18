@@ -1066,7 +1066,7 @@
     }
 
     .project-card {
-      position: sticky;
+      position: relative;
       top: 15vh;
       height: 70vh;
       width: 100%;
@@ -2645,37 +2645,40 @@ setInterval(updateClock, 1000);
   const cards = gsap.utils.toArray('.project-card');
   if (cards.length === 0) return;
 
-  // Loop through all cards except the last one to set up stacking scale/darken
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#projects',
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: true,
+    }
+  });
+
   cards.forEach((card, index) => {
-    if (index === cards.length - 1) return; // Skip last card
+    if (index < cards.length - 1) {
+      const nextCard = cards[index + 1];
+      const overlay = card.querySelector('.card-overlay');
+      const targetY = `-${(index + 1) * 85}vh`;
 
-    const nextCard = cards[index + 1];
-    const overlay = card.querySelector('.card-overlay');
-
-    // Smoothly scale down card as next card enters and overlaps
-    gsap.to(card, {
-      scrollTrigger: {
-        trigger: nextCard,
-        start: 'top 85%',
-        end: 'top 15vh',
-        scrub: true,
-      },
-      scale: 0.9,
-      ease: 'none'
-    });
-
-    // Darken card via dimming overlay as next card overlaps
-    if (overlay) {
-      gsap.to(overlay, {
-        scrollTrigger: {
-          trigger: nextCard,
-          start: 'top 85%',
-          end: 'top 15vh',
-          scrub: true,
-        },
-        opacity: 0.65,
+      // Next card slides up to cover current card
+      tl.to(nextCard, {
+        y: targetY,
         ease: 'none'
-      });
+      }, index);
+
+      // Current card scales down slightly
+      tl.to(card, {
+        scale: 0.9,
+        ease: 'none'
+      }, index);
+
+      // Current card darkens via overlay
+      if (overlay) {
+        tl.to(overlay, {
+          opacity: 0.65,
+          ease: 'none'
+        }, index);
+      }
     }
   });
 })();
