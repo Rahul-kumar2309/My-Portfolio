@@ -2168,31 +2168,33 @@ btnMute.addEventListener('click', () => {
 });
 
 /* ============================================================
-   HERO VIDEO INTERSECTION OBSERVER
-   Pause hero videos when out of view, resume when back in view
+   HERO VIDEO SCROLL PLAY/PAUSE OPTIMIZATION
+   Pause hero videos immediately as soon as user scrolls down,
+   resume when scrolled back to top. Optimized state tracking.
 ============================================================ */
-(function initHeroVideoObserver() {
-  const heroSection = document.getElementById('hero');
-  if (!heroSection || !fgVideo || !bgVideo) return;
+(function initHeroScrollVideoControls() {
+  if (!fgVideo || !bgVideo) return;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        // Resume playing if user hasn't explicitly paused it
-        if (isPlaying) {
-          fgVideo.play().catch(() => {});
-          bgVideo.play().catch(() => {});
-        }
-      } else {
+  let isVideoScrollPlaying = true;
+
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY || window.pageYOffset;
+
+    if (scrollPos > 50) {
+      if (isVideoScrollPlaying) {
         fgVideo.pause();
         bgVideo.pause();
+        isVideoScrollPlaying = false;
       }
-    });
-  }, {
-    threshold: 0
-  });
-
-  observer.observe(heroSection);
+    } else {
+      // Resume only if it was paused by scroll and user hasn't explicitly clicked pause
+      if (!isVideoScrollPlaying && isPlaying) {
+        fgVideo.play().catch(() => {});
+        bgVideo.play().catch(() => {});
+        isVideoScrollPlaying = true;
+      }
+    }
+  }, { passive: true });
 })();
 
 
