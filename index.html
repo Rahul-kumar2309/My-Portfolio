@@ -1011,6 +1011,7 @@
        ============================================================ */
     #projects {
       position: relative;
+      height: 100vh;
       min-height: 100vh;
       z-index: 40;
       border-top-left-radius: 40px;
@@ -1023,7 +1024,8 @@
       background-size: 100% 100%, 24px 24px;
       background-position: center top, 0 0;
       color: #ffffff;
-      padding: 6rem clamp(1.5rem, 5vw, 6rem) 10rem clamp(1.5rem, 5vw, 6rem);
+      padding: 6rem clamp(1.5rem, 5vw, 6rem) 0 clamp(1.5rem, 5vw, 6rem);
+      overflow: visible;
     }
 
     .projects-section-header {
