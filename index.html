@@ -1054,6 +1054,7 @@
     }
 
     .projects-stack-wrapper {
+      position: relative;
       max-width: 1100px;
       width: 100%;
       margin: 0 auto;
@@ -1065,10 +1066,10 @@
 
     .project-card {
       position: sticky;
-      top: 12vh;
-      height: 76vh;
+      top: 15vh;
+      height: 70vh;
       width: 100%;
-      margin-bottom: 12vh;
+      margin-bottom: 15vh;
       border-radius: 32px;
       will-change: transform;
     }
@@ -2400,10 +2401,10 @@ setInterval(updateClock, 1000);
       scrollTrigger: {
         trigger: nextCard,
         start: 'top 85%',
-        end: 'top 12vh',
+        end: 'top 15vh',
         scrub: true,
       },
-      scale: 0.93 - (index * 0.01),
+      scale: 0.94 - (index * 0.01),
       yPercent: -2 - (index * 0.5),
       ease: 'none'
     });
@@ -2414,10 +2415,10 @@ setInterval(updateClock, 1000);
         scrollTrigger: {
           trigger: nextCard,
           start: 'top 85%',
-          end: 'top 12vh',
+          end: 'top 15vh',
           scrub: true,
         },
-        opacity: 0.5,
+        opacity: 0.55,
         ease: 'none'
       });
     }
