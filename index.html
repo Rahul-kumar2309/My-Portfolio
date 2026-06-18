@@ -1010,9 +1010,7 @@
        PROJECTS SECTION (STACKED SCROLL CARDS)
        ============================================================ */
     #projects {
-      position: sticky;
-      top: 0;
-      min-height: 100vh;
+      position: relative;
       z-index: 4;
       border-top-left-radius: 40px;
       border-top-right-radius: 40px;
@@ -1025,7 +1023,6 @@
       background-position: center top, 0 0;
       color: #ffffff;
       padding: 6rem clamp(1.5rem, 5vw, 6rem) 10rem clamp(1.5rem, 5vw, 6rem);
-      overflow: hidden;
     }
 
     .projects-section-header {
@@ -1053,6 +1050,7 @@
       line-height: 1;
     }
 
+    .projects-wrapper,
     .projects-stack-wrapper {
       position: relative;
       max-width: 1100px;
@@ -1062,6 +1060,7 @@
       flex-direction: column;
       align-items: center;
       gap: 0;
+      padding-bottom: 5vh;
     }
 
     .project-card {
@@ -1071,6 +1070,8 @@
       width: 100%;
       margin-bottom: 15vh;
       border-radius: 32px;
+      transform-origin: top center;
+      background-color: #0f0f11;
       will-change: transform;
     }
 
@@ -1078,12 +1079,14 @@
       margin-bottom: 0;
     }
 
+    #project-card-1 { z-index: 1; }
+    #project-card-2 { z-index: 2; }
+    #project-card-3 { z-index: 3; }
+
     .project-card-inner {
       width: 100%;
       height: 100%;
-      background: rgba(18, 16, 20, 0.7);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: #0f0f11;
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 32px;
       display: grid;
@@ -1983,7 +1986,7 @@
     <h2 class="projects-title">FEATURED WORK</h2>
   </div>
   
-  <div class="projects-stack-wrapper">
+  <div class="projects-wrapper projects-stack-wrapper">
     <!-- Project Card 1: AUTONIX -->
     <div class="project-card" id="project-card-1">
       <div class="project-card-inner">
@@ -2406,8 +2409,7 @@ setInterval(updateClock, 1000);
         end: 'top 15vh',
         scrub: true,
       },
-      scale: 0.94 - (index * 0.01),
-      yPercent: -2 - (index * 0.5),
+      scale: 0.9,
       ease: 'none'
     });
 
@@ -2420,7 +2422,7 @@ setInterval(updateClock, 1000);
           end: 'top 15vh',
           scrub: true,
         },
-        opacity: 0.55,
+        opacity: 0.65,
         ease: 'none'
       });
     }
