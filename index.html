@@ -43,36 +43,12 @@
     body {
       min-height: 100dvh;
       background-color: #0a0a0c;
-      overflow-x: hidden;
+      overflow: visible !important;
     }
 
-    /* ============================================================
-       DECK-OF-CARDS WRAPPERS
-       Each sticky section lives inside a .card-scene wrapper that
-       gives the browser scroll-height so the next card can push
-       over the previous one correctly.
-    ============================================================ */
-    .card-scene {
-      position: relative;
+    main {
+      overflow: visible !important;
     }
-
-    /* Hero: fills exactly one viewport, then the next card pushes up */
-    #hero-scene { height: 200vh; }
-
-    /* About: same — one vh to view + one vh of scroll to push it */
-    #about-scene { height: 200vh; }
-
-    /* Who I Am: white section */
-    #who-scene { height: 200vh; }
-
-    /* Projects: enough scroll height for 3 cards (each needs ~100vh gap) */
-    #projects-scene { height: 600vh; }
-
-    /* Experience: 200vh */
-    #experience-scene { height: 200vh; }
-
-    /* Contact: just needs to fill the viewport — it's the last card */
-    #contact-scene { height: 100vh; }
 
     /* ============================================================
        HERO SECTION
@@ -1039,9 +1015,7 @@
        PROJECTS SECTION (STACKED SCROLL CARDS)
        ============================================================ */
     #projects {
-      position: sticky;
-      top: 0;
-      min-height: 100vh;
+      position: relative;
       z-index: 40;
       border-top-left-radius: 40px;
       border-top-right-radius: 40px;
@@ -1054,7 +1028,7 @@
       background-position: center top, 0 0;
       color: #ffffff;
       padding: 6rem clamp(1.5rem, 5vw, 6rem) 10rem clamp(1.5rem, 5vw, 6rem);
-      overflow: hidden;
+      overflow: visible !important;
     }
 
     .projects-section-header {
@@ -1082,34 +1056,43 @@
       line-height: 1;
     }
 
-    /* Stack-container: fills the pinned section below the header */
+    .projects-section {
+      overflow: visible !important;
+    }
+
     .projects-wrapper,
     .projects-stack-wrapper {
       position: relative;
       max-width: 1100px;
       width: 100%;
       margin: 0 auto;
-      /* Height = viewport minus the header area */
-      height: calc(100vh - 22rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding-bottom: 20vh;
+      overflow: visible !important;
     }
 
     .project-card {
-      position: absolute;
-      inset: 0;
+      position: sticky !important;
+      top: 15vh !important;
+      height: 70vh !important;
       width: 100%;
-      height: 100%;
+      margin-bottom: 40vh; /* Creates the scrolling gap between cards */
       overflow: hidden;
       border-radius: 32px;
       transform-origin: top center;
       background-color: #0f0f11;
       display: flex;
       will-change: transform;
-      /* Start cards off-screen below */
-      transform: translateY(100%);
     }
 
-    /* First card is already visible */
-    #project-card-1 { z-index: 1; transform: translateY(0); }
+    .project-card:last-child {
+      margin-bottom: 0;
+    }
+
+    #project-card-1 { z-index: 1; }
     #project-card-2 { z-index: 2; }
     #project-card-3 { z-index: 3; }
 
@@ -1126,18 +1109,11 @@
     }
 
     @media (max-width: 900px) {
-      /* On mobile: stack cards vertically with normal flow */
-      .projects-wrapper,
-      .projects-stack-wrapper {
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-      }
       .project-card {
-        position: relative;
-        inset: auto;
         height: auto;
+        position: relative;
+        top: 0 !important;
+        margin-bottom: 4rem;
         transform: none !important;
       }
       .project-card-inner {
@@ -1156,8 +1132,10 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      gap: 0;
       position: relative;
       z-index: 2;
+      overflow: visible;
     }
 
     .project-num {
@@ -1207,36 +1185,41 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      font-size: 0.9rem;
-      font-weight: bold !important;
+      font-size: 0.85rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #0a0a0c !important;
-      background: #f97316 !important;
-      border: none !important;
-      padding: 12px 28px;
+      letter-spacing: 0.1em;
+      color: #ffffff;
+      background: #f97316;
+      border: 2px solid #f97316;
+      padding: 11px 26px;
       border-radius: 30px;
       text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);
+      cursor: pointer;
+      transition: background 0.28s ease, color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+      box-shadow: 0 4px 20px rgba(249, 115, 22, 0.35);
+      margin-top: 1.2rem;
+      position: relative;
+      z-index: 10;
     }
 
     .project-btn svg {
       width: 16px;
       height: 16px;
       fill: currentColor;
+      flex-shrink: 0;
       transition: transform 0.3s ease;
     }
 
     .project-btn:hover {
-      background: #0a0a0c !important;
-      color: #f97316 !important;
+      background: transparent;
+      color: #f97316;
       transform: translateY(-2px);
-      box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.5), 0 4px 20px rgba(249, 115, 22, 0.2);
     }
 
     .project-btn:hover svg {
-      transform: scale(1.08);
+      transform: scale(1.12) rotate(-5deg);
     }
 
     /* Right Side — Media Placeholder */
@@ -1478,7 +1461,7 @@
        CONTACT SECTION (COMMAND CENTER / TERMINAL UI)
        ============================================================ */
     #contact {
-      position: sticky;
+      position: sticky !important;
       top: 0;
       min-height: 100vh;
       z-index: 60; /* Must be higher than the previous Experience section */
@@ -1507,6 +1490,10 @@
 
     @media (max-width: 900px) {
       #contact {
+        position: relative;
+        height: auto;
+        min-height: auto;
+        top: 0;
         padding: 4rem 1.5rem;
       }
       .contact-container {
@@ -1717,11 +1704,6 @@
 
     .term-email:hover {
       text-decoration: underline;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
     }
 
     /* Blinking Cursor */
@@ -2007,8 +1989,6 @@
 </head>
 <body>
 
-<div id="hero-scene" class="card-scene">
-
 <!-- ============================================================
      HERO SECTION
 ============================================================ -->
@@ -2079,10 +2059,6 @@
   </div>
 
 </section>
-
-</div><!-- /hero-scene -->
-
-<div id="about-scene" class="card-scene">
 
 <!-- ============================================================
      ABOUT / PROFILE SECTION
@@ -2673,9 +2649,6 @@
 
 </section>
 
-</div><!-- /about-scene -->
-
-<div id="who-scene" class="card-scene">
 
 <!-- ============================================================
      WHO I AM SECTION (MINIMALIST WHITE)
@@ -2744,9 +2717,6 @@
   </div>
 </section>
 
-</div><!-- /who-scene -->
-
-<div id="projects-scene" class="card-scene">
 
 <!-- ============================================================
      PROJECTS SECTION (STICKY STACKING CARDS)
@@ -2866,10 +2836,6 @@
   </div>
 </section>
 
-</div><!-- /projects-scene -->
-
-<div id="experience-scene" class="card-scene">
-
 <!-- ============================================================
      EXPERIENCE / JOURNEY SECTION
 ============================================================ -->
@@ -2927,10 +2893,6 @@
     </div>
   </div>
 </section>
-
-</div><!-- /experience-scene -->
-
-<div id="contact-scene" class="card-scene">
 
 <!-- ============================================================
      CONTACT SECTION (COMMAND CENTER / TERMINAL UI)
@@ -3001,14 +2963,14 @@
             <span>GitHub</span>
           </a>
           <!-- LinkedIn -->
-          <a class="contact-social-item" href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <a class="contact-social-item" href="https://www.linkedin.com/in/rahul-kumar-894a90207/" target="_blank" rel="noopener" aria-label="LinkedIn">
             <div class="contact-social-card">
               <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </div>
             <span>LinkedIn</span>
           </a>
           <!-- Instagram -->
-          <a class="contact-social-item" href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+          <a class="contact-social-item" href="https://www.instagram.com/rahul_kumar_2.3/" target="_blank" rel="noopener" aria-label="Instagram">
             <div class="contact-social-card">
               <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             </div>
@@ -3069,8 +3031,6 @@
 
   </div>
 </section>
-
-</div><!-- /contact-scene -->
 
 
 <!-- ============================================================
@@ -3204,8 +3164,7 @@ scrollBtn.addEventListener('click',   scrollToNext);
 scrollBtn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') scrollToNext(); });
 
 function scrollToNext() {
-  const about = document.getElementById('about');
-  if (about) about.scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('next-section').scrollIntoView({ behavior: 'smooth' });
 }
 
 
@@ -3369,68 +3328,39 @@ setInterval(updateClock, 1000);
    PROJECTS SECTION — STACKED SCROLL TRIGGER
    ============================================================ */
 (function initProjectsStack() {
-  const projectsScene = document.getElementById('projects-scene');
   const cards = gsap.utils.toArray('.project-card');
-  if (cards.length === 0 || !projectsScene) return;
-
-  // Pin the #projects section inside the #projects-scene for the full scroll height
-  ScrollTrigger.create({
-    trigger: projectsScene,
-    start: 'top top',
-    end: 'bottom bottom',
-    pin: '#projects',
-    pinSpacing: false,
-  });
-
-  // For each card (except the last), scale it down and dim it
-  // as the next card enters the viewport
-  const cardHeight = () => window.innerHeight * 0.70;
-  const topOffset  = () => window.innerHeight * 0.15;
+  if (cards.length === 0) return;
 
   cards.forEach((card, index) => {
-    // Animate each card into position from the bottom
-    gsap.fromTo(card,
-      { y: index === 0 ? 0 : '100%' },
-      {
-        y: 0,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: projectsScene,
-          start: () => `top+=${index * (window.innerHeight)} top`,
-          end: () => `top+=${(index + 1) * (window.innerHeight)} top`,
-          scrub: true,
-          invalidateOnRefresh: true,
-        }
-      }
-    );
+    if (index === cards.length - 1) return; // Skip last card
 
-    // Also stack-scale the card down when the NEXT card comes over it
-    if (index < cards.length - 1) {
-      const overlay = card.querySelector('.card-overlay');
-      gsap.to(card, {
-        scale: 0.92,
-        ease: 'none',
+    const nextCard = cards[index + 1];
+    const overlay = card.querySelector('.card-overlay');
+
+    // Smoothly scale down card as next card enters and overlaps
+    gsap.to(card, {
+      scrollTrigger: {
+        trigger: nextCard,
+        start: 'top 85%',
+        end: 'top 15vh',
+        scrub: true,
+      },
+      scale: 0.9,
+      ease: 'none'
+    });
+
+    // Darken card via dimming overlay as next card overlaps
+    if (overlay) {
+      gsap.to(overlay, {
         scrollTrigger: {
-          trigger: projectsScene,
-          start: () => `top+=${(index + 1) * (window.innerHeight)} top`,
-          end: () => `top+=${(index + 2) * (window.innerHeight)} top`,
+          trigger: nextCard,
+          start: 'top 85%',
+          end: 'top 15vh',
           scrub: true,
-          invalidateOnRefresh: true,
-        }
+        },
+        opacity: 0.65,
+        ease: 'none'
       });
-      if (overlay) {
-        gsap.to(overlay, {
-          opacity: 0.6,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: projectsScene,
-            start: () => `top+=${(index + 1) * (window.innerHeight)} top`,
-            end: () => `top+=${(index + 2) * (window.innerHeight)} top`,
-            scrub: true,
-            invalidateOnRefresh: true,
-          }
-        });
-      }
     }
   });
 })();
