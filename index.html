@@ -994,6 +994,231 @@
       font-weight: 500;
       text-align: left;
     }
+
+    /* ============================================================
+       PROJECTS SECTION (STACKED SCROLL CARDS)
+       ============================================================ */
+    #projects {
+      position: relative;
+      background: #080608;
+      color: #ffffff;
+      padding: 6rem clamp(1.5rem, 5vw, 6rem) 10rem clamp(1.5rem, 5vw, 6rem);
+      z-index: 10;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .projects-section-header {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto 5rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .projects-label {
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: #ff6b2b;
+    }
+
+    .projects-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      letter-spacing: 0.03em;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .projects-stack-wrapper {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .project-card {
+      position: sticky;
+      top: 12vh;
+      height: 76vh;
+      width: 100%;
+      margin-bottom: 12vh;
+      border-radius: 32px;
+      will-change: transform;
+    }
+
+    .project-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-card-inner {
+      width: 100%;
+      height: 100%;
+      background: rgba(18, 16, 20, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 32px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 900px) {
+      .project-card {
+        height: auto;
+        position: relative;
+        top: 0 !important;
+        margin-bottom: 4rem;
+        transform: none !important;
+      }
+      .project-card-inner {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .project-media {
+        aspect-ratio: 16/10;
+        height: 280px;
+      }
+    }
+
+    /* Left Side — Project Info */
+    .project-info {
+      padding: clamp(2rem, 5vw, 4.5rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .project-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: rgba(255, 107, 43, 0.15);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .project-name {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+      line-height: 1.15;
+    }
+
+    .project-desc {
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      line-height: 1.6;
+      color: #a0a0a8;
+      margin-bottom: 2rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .proj-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+      text-transform: uppercase;
+    }
+
+    .project-btn {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #ffffff;
+      background: #ff6b2b;
+      padding: 0.85rem 1.6rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 12px rgba(255, 107, 43, 0.2);
+    }
+
+    .project-btn svg {
+      width: 10px;
+      height: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .project-btn:hover {
+      background: #ffffff;
+      color: #ff6b2b;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+    }
+
+    .project-btn:hover svg {
+      transform: translate(2px, -2px);
+    }
+
+    /* Right Side — Media Placeholder */
+    .project-media {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background: #110f13;
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    @media (max-width: 900px) {
+      .project-media {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+    }
+
+    .project-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 107, 43, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+      padding: 3rem;
+    }
+
+    .placeholder-icon {
+      width: 50%;
+      max-width: 180px;
+      height: auto;
+      filter: drop-shadow(0 10px 20px rgba(255, 107, 43, 0.15));
+    }
+
+    /* Card dimming overlay */
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: #000000;
+      opacity: 0;
+      pointer-events: none;
+      border-radius: 32px;
+      transition: opacity 0.15s ease-out;
+      z-index: 3;
+    }
   </style>
 </head>
 <body>
@@ -1728,6 +1953,162 @@
 
 
 <!-- ============================================================
+     PROJECTS SECTION (STICKY STACKING CARDS)
+============================================================ -->
+<section id="projects" aria-label="Projects">
+  <div class="projects-section-header">
+    <span class="projects-label">Selected Projects</span>
+    <h2 class="projects-title">FEATURED WORK</h2>
+  </div>
+  
+  <div class="projects-stack-wrapper">
+    <!-- Project Card 1: AUTONIX -->
+    <div class="project-card" id="project-card-1">
+      <div class="project-card-inner">
+        <div class="project-info">
+          <span class="project-num">01</span>
+          <h3 class="project-name">AUTONIX Rescue Rover</h3>
+          <p class="project-desc">
+            An autonomous rescue vehicle featuring acoustic fire suppression technology. Built with Team INSNAPERZ, showcasing advanced hardware engineering, kinematics, and system integration.
+          </p>
+          <div class="project-tags">
+            <span class="proj-tag">ROS</span>
+            <span class="proj-tag">Embedded C++</span>
+            <span class="proj-tag">IoT</span>
+            <span class="proj-tag">ESP32-S3</span>
+          </div>
+          <a href="#" class="project-btn" target="_blank" rel="noopener">
+            View Project
+            <svg viewBox="0 0 10 10" fill="none"><path d="M1 9l8-8M3 1h6v6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="project-media">
+          <div class="project-image-placeholder">
+            <svg viewBox="0 0 100 100" class="placeholder-icon">
+              <!-- Custom circuit flow visual -->
+              <path d="M10,50 L30,50 L40,30 L50,70 L60,50 L90,50" stroke="#ff6b2b" stroke-width="2" fill="none" opacity="0.3" stroke-dasharray="6 3"/>
+              <circle cx="10" cy="50" r="3" fill="#ff6b2b"/>
+              <circle cx="90" cy="50" r="3" fill="#ff6b2b"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="card-overlay"></div>
+    </div>
+
+    <!-- Project Card 2: DocuMind -->
+    <div class="project-card" id="project-card-2">
+      <div class="project-card-inner">
+        <div class="project-info">
+          <span class="project-num">02</span>
+          <h3 class="project-name">DocuMind AI</h3>
+          <p class="project-desc">
+            An AI-powered study assistant engineered during HackSprint 2025. Designed to process and summarize complex documents using modern web technologies and AI integrations.
+          </p>
+          <div class="project-tags">
+            <span class="proj-tag">Full-Stack</span>
+            <span class="proj-tag">Next.js</span>
+            <span class="proj-tag">AI Integration</span>
+          </div>
+          <a href="#" class="project-btn" target="_blank" rel="noopener">
+            View Project
+            <svg viewBox="0 0 10 10" fill="none"><path d="M1 9l8-8M3 1h6v6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="project-media">
+          <div class="project-image-placeholder">
+            <svg viewBox="0 0 100 100" class="placeholder-icon">
+              <!-- Custom brain network visual -->
+              <circle cx="50" cy="50" r="25" stroke="#ff6b2b" stroke-width="1.5" fill="none" opacity="0.25"/>
+              <line x1="25" y1="50" x2="75" y2="50" stroke="#ff6b2b" stroke-width="1.5" opacity="0.25"/>
+              <line x1="50" y1="25" x2="50" y2="75" stroke="#ff6b2b" stroke-width="1.5" opacity="0.25"/>
+              <circle cx="50" cy="50" r="4" fill="#ff6b2b"/>
+              <circle cx="25" cy="50" r="4" fill="#ff6b2b"/>
+              <circle cx="75" cy="50" r="4" fill="#ff6b2b"/>
+              <circle cx="50" cy="25" r="4" fill="#ff6b2b"/>
+              <circle cx="50" cy="75" r="4" fill="#ff6b2b"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="card-overlay"></div>
+    </div>
+
+    <!-- Project Card 3: CECP Club Platform -->
+    <div class="project-card" id="project-card-3">
+      <div class="project-card-inner">
+        <div class="project-info">
+          <span class="project-num">03</span>
+          <h3 class="project-name">CECP Dashboard</h3>
+          <p class="project-desc">
+            A complete, professional management platform and dashboard built to streamline operations and member management for the college club.
+          </p>
+          <div class="project-tags">
+            <span class="proj-tag">Clup Platform</span>
+            <span class="proj-tag">UI/UX</span>
+            <span class="proj-tag">Web Design</span>
+          </div>
+          <a href="#" class="project-btn" target="_blank" rel="noopener">
+            View Project
+            <svg viewBox="0 0 10 10" fill="none"><path d="M1 9l8-8M3 1h6v6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="project-media">
+          <div class="project-image-placeholder">
+            <svg viewBox="0 0 100 100" class="placeholder-icon">
+              <!-- Custom dashboard mock visual -->
+              <rect x="15" y="20" width="70" height="60" rx="4" stroke="#ff6b2b" stroke-width="1.8" fill="none" opacity="0.3"/>
+              <line x1="15" y1="38" x2="85" y2="38" stroke="#ff6b2b" stroke-width="1.8" opacity="0.3"/>
+              <line x1="38" y1="38" x2="38" y2="80" stroke="#ff6b2b" stroke-width="1.8" opacity="0.3"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="card-overlay"></div>
+    </div>
+
+    <!-- Project Card 4: AeroNet Telemetry Hub -->
+    <div class="project-card" id="project-card-4">
+      <div class="project-card-inner">
+        <div class="project-info">
+          <span class="project-num">04</span>
+          <h3 class="project-name">AeroNet Telemetry Hub</h3>
+          <p class="project-desc">
+            A real-time telemetry processing node built for low-latency transmission, sensor telemetry logging, RTOS telemetry tasks, and analytical visualization.
+          </p>
+          <div class="project-tags">
+            <span class="proj-tag">RTOS</span>
+            <span class="proj-tag">LoRaWAN</span>
+            <span class="proj-tag">Sensor Fusion</span>
+            <span class="proj-tag">Python</span>
+          </div>
+          <a href="#" class="project-btn" target="_blank" rel="noopener">
+            View Project
+            <svg viewBox="0 0 10 10" fill="none"><path d="M1 9l8-8M3 1h6v6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="project-media">
+          <div class="project-image-placeholder">
+            <svg viewBox="0 0 100 100" class="placeholder-icon">
+              <!-- Custom drone telemetry visual -->
+              <circle cx="50" cy="50" r="15" stroke="#ff6b2b" stroke-width="1.8" fill="none" opacity="0.3"/>
+              <line x1="15" y1="15" x2="85" y2="85" stroke="#ff6b2b" stroke-width="1.8" opacity="0.3"/>
+              <line x1="85" y1="15" x2="15" y2="85" stroke="#ff6b2b" stroke-width="1.8" opacity="0.3"/>
+              <circle cx="15" cy="15" r="4" fill="#ff6b2b"/>
+              <circle cx="85" cy="15" r="4" fill="#ff6b2b"/>
+              <circle cx="15" cy="85" r="4" fill="#ff6b2b"/>
+              <circle cx="85" cy="85" r="4" fill="#ff6b2b"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="card-overlay"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
      SCRIPTS — Three.js + GSAP via CDN (ESM)
 ============================================================ -->
 <script type="importmap">
@@ -1985,6 +2366,49 @@ setInterval(updateClock, 1000);
     duration: 1.2,
     stagger: 0.15,
     ease: 'power3.out'
+  });
+})();
+
+/* ============================================================
+   PROJECTS SECTION — STACKED SCROLL TRIGGER
+   ============================================================ */
+(function initProjectsStack() {
+  const cards = gsap.utils.toArray('.project-card');
+  if (cards.length === 0) return;
+
+  // Loop through all cards except the last one to set up stacking scale/darken
+  cards.forEach((card, index) => {
+    if (index === cards.length - 1) return; // Skip last card
+
+    const nextCard = cards[index + 1];
+    const overlay = card.querySelector('.card-overlay');
+
+    // Smoothly scale down card as next card enters and overlaps
+    gsap.to(card, {
+      scrollTrigger: {
+        trigger: nextCard,
+        start: 'top 85%',
+        end: 'top 12vh',
+        scrub: true,
+      },
+      scale: 0.93 - (index * 0.01),
+      yPercent: -2 - (index * 0.5),
+      ease: 'none'
+    });
+
+    // Darken card via dimming overlay as next card overlaps
+    if (overlay) {
+      gsap.to(overlay, {
+        scrollTrigger: {
+          trigger: nextCard,
+          start: 'top 85%',
+          end: 'top 12vh',
+          scrub: true,
+        },
+        opacity: 0.5,
+        ease: 'none'
+      });
+    }
   });
 })();
 
