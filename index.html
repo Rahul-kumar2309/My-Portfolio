@@ -43,12 +43,36 @@
     body {
       min-height: 100dvh;
       background-color: #0a0a0c;
-      overflow: visible !important;
+      overflow-x: hidden;
     }
 
-    main {
-      overflow: visible !important;
+    /* ============================================================
+       DECK-OF-CARDS WRAPPERS
+       Each sticky section lives inside a .card-scene wrapper that
+       gives the browser scroll-height so the next card can push
+       over the previous one correctly.
+    ============================================================ */
+    .card-scene {
+      position: relative;
     }
+
+    /* Hero: fills exactly one viewport, then the next card pushes up */
+    #hero-scene { height: 200vh; }
+
+    /* About: same — one vh to view + one vh of scroll to push it */
+    #about-scene { height: 200vh; }
+
+    /* Who I Am: white section */
+    #who-scene { height: 200vh; }
+
+    /* Projects: enough scroll height for 3 cards (each needs ~100vh gap) */
+    #projects-scene { height: 600vh; }
+
+    /* Experience: 200vh */
+    #experience-scene { height: 200vh; }
+
+    /* Contact: just needs to fill the viewport — it's the last card */
+    #contact-scene { height: 100vh; }
 
     /* ============================================================
        HERO SECTION
@@ -1015,7 +1039,9 @@
        PROJECTS SECTION (STACKED SCROLL CARDS)
        ============================================================ */
     #projects {
-      position: relative;
+      position: sticky;
+      top: 0;
+      min-height: 100vh;
       z-index: 40;
       border-top-left-radius: 40px;
       border-top-right-radius: 40px;
@@ -1028,7 +1054,7 @@
       background-position: center top, 0 0;
       color: #ffffff;
       padding: 6rem clamp(1.5rem, 5vw, 6rem) 10rem clamp(1.5rem, 5vw, 6rem);
-      overflow: visible !important;
+      overflow: hidden;
     }
 
     .projects-section-header {
@@ -1056,43 +1082,34 @@
       line-height: 1;
     }
 
-    .projects-section {
-      overflow: visible !important;
-    }
-
+    /* Stack-container: fills the pinned section below the header */
     .projects-wrapper,
     .projects-stack-wrapper {
       position: relative;
       max-width: 1100px;
       width: 100%;
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-      padding-bottom: 20vh;
-      overflow: visible !important;
+      /* Height = viewport minus the header area */
+      height: calc(100vh - 22rem);
     }
 
     .project-card {
-      position: sticky !important;
-      top: 15vh !important;
-      height: 70vh !important;
+      position: absolute;
+      inset: 0;
       width: 100%;
-      margin-bottom: 40vh; /* Creates the scrolling gap between cards */
+      height: 100%;
       overflow: hidden;
       border-radius: 32px;
       transform-origin: top center;
       background-color: #0f0f11;
       display: flex;
       will-change: transform;
+      /* Start cards off-screen below */
+      transform: translateY(100%);
     }
 
-    .project-card:last-child {
-      margin-bottom: 0;
-    }
-
-    #project-card-1 { z-index: 1; }
+    /* First card is already visible */
+    #project-card-1 { z-index: 1; transform: translateY(0); }
     #project-card-2 { z-index: 2; }
     #project-card-3 { z-index: 3; }
 
@@ -1109,11 +1126,18 @@
     }
 
     @media (max-width: 900px) {
-      .project-card {
+      /* On mobile: stack cards vertically with normal flow */
+      .projects-wrapper,
+      .projects-stack-wrapper {
         height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .project-card {
         position: relative;
-        top: 0 !important;
-        margin-bottom: 4rem;
+        inset: auto;
+        height: auto;
         transform: none !important;
       }
       .project-card-inner {
@@ -1454,7 +1478,7 @@
        CONTACT SECTION (COMMAND CENTER / TERMINAL UI)
        ============================================================ */
     #contact {
-      position: sticky !important;
+      position: sticky;
       top: 0;
       min-height: 100vh;
       z-index: 60; /* Must be higher than the previous Experience section */
@@ -1483,10 +1507,6 @@
 
     @media (max-width: 900px) {
       #contact {
-        position: relative;
-        height: auto;
-        min-height: auto;
-        top: 0;
         padding: 4rem 1.5rem;
       }
       .contact-container {
@@ -1697,6 +1717,11 @@
 
     .term-email:hover {
       text-decoration: underline;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
     /* Blinking Cursor */
@@ -1982,6 +2007,8 @@
 </head>
 <body>
 
+<div id="hero-scene" class="card-scene">
+
 <!-- ============================================================
      HERO SECTION
 ============================================================ -->
@@ -2052,6 +2079,10 @@
   </div>
 
 </section>
+
+</div><!-- /hero-scene -->
+
+<div id="about-scene" class="card-scene">
 
 <!-- ============================================================
      ABOUT / PROFILE SECTION
@@ -2642,6 +2673,9 @@
 
 </section>
 
+</div><!-- /about-scene -->
+
+<div id="who-scene" class="card-scene">
 
 <!-- ============================================================
      WHO I AM SECTION (MINIMALIST WHITE)
@@ -2710,6 +2744,9 @@
   </div>
 </section>
 
+</div><!-- /who-scene -->
+
+<div id="projects-scene" class="card-scene">
 
 <!-- ============================================================
      PROJECTS SECTION (STICKY STACKING CARDS)
@@ -2829,6 +2866,10 @@
   </div>
 </section>
 
+</div><!-- /projects-scene -->
+
+<div id="experience-scene" class="card-scene">
+
 <!-- ============================================================
      EXPERIENCE / JOURNEY SECTION
 ============================================================ -->
@@ -2886,6 +2927,10 @@
     </div>
   </div>
 </section>
+
+</div><!-- /experience-scene -->
+
+<div id="contact-scene" class="card-scene">
 
 <!-- ============================================================
      CONTACT SECTION (COMMAND CENTER / TERMINAL UI)
@@ -3025,6 +3070,8 @@
   </div>
 </section>
 
+</div><!-- /contact-scene -->
+
 
 <!-- ============================================================
      SCRIPTS — Three.js + GSAP via CDN (ESM)
@@ -3157,7 +3204,8 @@ scrollBtn.addEventListener('click',   scrollToNext);
 scrollBtn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') scrollToNext(); });
 
 function scrollToNext() {
-  document.getElementById('next-section').scrollIntoView({ behavior: 'smooth' });
+  const about = document.getElementById('about');
+  if (about) about.scrollIntoView({ behavior: 'smooth' });
 }
 
 
@@ -3321,39 +3369,68 @@ setInterval(updateClock, 1000);
    PROJECTS SECTION — STACKED SCROLL TRIGGER
    ============================================================ */
 (function initProjectsStack() {
+  const projectsScene = document.getElementById('projects-scene');
   const cards = gsap.utils.toArray('.project-card');
-  if (cards.length === 0) return;
+  if (cards.length === 0 || !projectsScene) return;
+
+  // Pin the #projects section inside the #projects-scene for the full scroll height
+  ScrollTrigger.create({
+    trigger: projectsScene,
+    start: 'top top',
+    end: 'bottom bottom',
+    pin: '#projects',
+    pinSpacing: false,
+  });
+
+  // For each card (except the last), scale it down and dim it
+  // as the next card enters the viewport
+  const cardHeight = () => window.innerHeight * 0.70;
+  const topOffset  = () => window.innerHeight * 0.15;
 
   cards.forEach((card, index) => {
-    if (index === cards.length - 1) return; // Skip last card
-
-    const nextCard = cards[index + 1];
-    const overlay = card.querySelector('.card-overlay');
-
-    // Smoothly scale down card as next card enters and overlaps
-    gsap.to(card, {
-      scrollTrigger: {
-        trigger: nextCard,
-        start: 'top 85%',
-        end: 'top 15vh',
-        scrub: true,
-      },
-      scale: 0.9,
-      ease: 'none'
-    });
-
-    // Darken card via dimming overlay as next card overlaps
-    if (overlay) {
-      gsap.to(overlay, {
+    // Animate each card into position from the bottom
+    gsap.fromTo(card,
+      { y: index === 0 ? 0 : '100%' },
+      {
+        y: 0,
+        ease: 'none',
         scrollTrigger: {
-          trigger: nextCard,
-          start: 'top 85%',
-          end: 'top 15vh',
+          trigger: projectsScene,
+          start: () => `top+=${index * (window.innerHeight)} top`,
+          end: () => `top+=${(index + 1) * (window.innerHeight)} top`,
           scrub: true,
-        },
-        opacity: 0.65,
-        ease: 'none'
+          invalidateOnRefresh: true,
+        }
+      }
+    );
+
+    // Also stack-scale the card down when the NEXT card comes over it
+    if (index < cards.length - 1) {
+      const overlay = card.querySelector('.card-overlay');
+      gsap.to(card, {
+        scale: 0.92,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: projectsScene,
+          start: () => `top+=${(index + 1) * (window.innerHeight)} top`,
+          end: () => `top+=${(index + 2) * (window.innerHeight)} top`,
+          scrub: true,
+          invalidateOnRefresh: true,
+        }
       });
+      if (overlay) {
+        gsap.to(overlay, {
+          opacity: 0.6,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: projectsScene,
+            start: () => `top+=${(index + 1) * (window.innerHeight)} top`,
+            end: () => `top+=${(index + 2) * (window.innerHeight)} top`,
+            scrub: true,
+            invalidateOnRefresh: true,
+          }
+        });
+      }
     }
   });
 })();
