@@ -3321,6 +3321,21 @@ setInterval(updateClock, 1000);
     stagger: 0.15,
     ease: 'power3.out'
   });
+
+  // 4. Hide sticky sections when fully covered to prevent corner bleed-through
+  ScrollTrigger.create({
+    trigger: '#who-i-am',
+    start: 'top top',
+    onEnter: () => gsap.set('#about', { visibility: 'hidden' }),
+    onLeaveBack: () => gsap.set('#about', { visibility: 'visible' }),
+  });
+
+  ScrollTrigger.create({
+    trigger: '#projects',
+    start: 'top top',
+    onEnter: () => gsap.set('#who-i-am', { visibility: 'hidden' }),
+    onLeaveBack: () => gsap.set('#who-i-am', { visibility: 'visible' }),
+  });
 })();
 
 /* ============================================================
