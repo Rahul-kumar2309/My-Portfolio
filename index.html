@@ -704,19 +704,7 @@
       flex-shrink: 0;
     }
 
-    /* ── Profile photo ── */
-    #ab-photo {
-      position: absolute;
-      bottom: -2rem;
-      right: -3rem;
-      width: clamp(260px,32vw,430px);
-      height: auto;
-      z-index: 1;
-      pointer-events: none;
-      object-fit: contain;
-      object-position: bottom;
-      filter: drop-shadow(0 20px 60px rgba(100,30,0,0.3));
-    }
+
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
@@ -1012,13 +1000,7 @@
         </div>
       </div>
 
-      <!-- Profile photo — replace src with your transparent cutout -->
-      <img
-        id="ab-photo"
-        src="developer.png"
-        alt="Rahul Kumar profile"
-        loading="lazy"
-      />
+
 
     </div>
   </main>
@@ -1206,7 +1188,7 @@ setInterval(updateClock, 1000);
   gsap.set('#ab-cta',       { opacity: 0, y: 20, scale: 0.95 });
   gsap.set('#ab-card-1',    { opacity: 0, y: 40, scale: 0.96 });
   gsap.set('#ab-card-2',    { opacity: 0, y: 40, scale: 0.96 });
-  gsap.set('#ab-photo',     { opacity: 0, x: 40 });
+
   gsap.set('#ab-sidebar',   { opacity: 0, x: -20 });
   gsap.set('#ab-topbar',    { opacity: 0, y: -16 });
 
@@ -1237,8 +1219,7 @@ setInterval(updateClock, 1000);
     /* 7. Cards boot up with slight delay between them */
     .to('#ab-card-1',         { opacity: 1, y: 0, scale: 1, duration: 0.6 }, '-=0.3')
     .to('#ab-card-2',         { opacity: 1, y: 0, scale: 1, duration: 0.6 }, '-=0.3')
-    /* 8. Photo slides in from right */
-    .to('#ab-photo',          { opacity: 1, x: 0, duration: 0.8, ease: 'power2.out' }, '-=0.5');
+;
 
   /* Initially hide tags individually for stagger */
   gsap.set('#ab-tags .ab-tag', { opacity: 0, y: 20 });
