@@ -868,21 +868,16 @@
       transform: scale(1.06);
     }
     
-    .who-signature {
+    .who-signature-img {
       position: absolute;
-      bottom: 22px;
-      right: 25px;
-      font-family: 'Caveat', cursive;
-      font-size: clamp(2.8rem, 4.5vw, 3.8rem);
-      color: #ff6b2b;
-      transform: rotate(-6deg);
+      bottom: 12px;
+      right: 18px;
+      width: clamp(100px, 15vw, 130px);
+      height: auto;
       pointer-events: none;
-      text-shadow: 
-        1px 1px 0px #ffffff,
-        -1px -1px 0px #ffffff,
-        1px -1px 0px #ffffff,
-        -1px 1px 0px #ffffff,
-        0 4px 12px rgba(255, 107, 43, 0.15);
+      transform: rotate(-10deg);
+      mix-blend-mode: multiply;
+      filter: contrast(1.2) brightness(1.05);
       user-select: none;
     }
     
@@ -1661,6 +1656,7 @@
     <div class="who-left">
       <div class="who-image-wrapper">
         <img src="developer.png" alt="Rahul Kumar" loading="lazy" onerror="this.style.display='none';">
+        <img src="mysignature.png" alt="Rahul" class="who-signature-img">
       </div>
       <div class="who-socials">
         <a class="who-social-btn" href="https://github.com/Rahul-kumar2309" target="_blank" rel="noopener" aria-label="GitHub">
