@@ -37,12 +37,17 @@
       background-color: #0a0a0c;
       color: #fff;
       font-family: 'Inter', system-ui, sans-serif;
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     body {
       min-height: 100dvh;
       background-color: #0a0a0c;
+      overflow: visible !important;
+    }
+
+    main {
+      overflow: visible !important;
     }
 
     /* ============================================================
@@ -1011,8 +1016,6 @@
        ============================================================ */
     #projects {
       position: relative;
-      height: 100vh;
-      min-height: 100vh;
       z-index: 40;
       border-top-left-radius: 40px;
       border-top-right-radius: 40px;
@@ -1024,8 +1027,8 @@
       background-size: 100% 100%, 24px 24px;
       background-position: center top, 0 0;
       color: #ffffff;
-      padding: 6rem clamp(1.5rem, 5vw, 6rem) 0 clamp(1.5rem, 5vw, 6rem);
-      overflow: visible;
+      padding: 6rem clamp(1.5rem, 5vw, 6rem) 10rem clamp(1.5rem, 5vw, 6rem);
+      overflow: visible !important;
     }
 
     .projects-section-header {
@@ -1053,6 +1056,10 @@
       line-height: 1;
     }
 
+    .projects-section {
+      overflow: visible !important;
+    }
+
     .projects-wrapper,
     .projects-stack-wrapper {
       position: relative;
@@ -1064,19 +1071,20 @@
       align-items: center;
       gap: 0;
       padding-bottom: 20vh;
+      overflow: visible !important;
     }
 
     .project-card {
-      position: relative;
-      top: 15vh;
-      height: 70vh;
+      position: sticky !important;
+      top: 15vh !important;
+      height: 70vh !important;
       width: 100%;
-      margin-bottom: 15vh;
+      margin-bottom: 40vh; /* Creates the scrolling gap between cards */
+      overflow: hidden;
       border-radius: 32px;
       transform-origin: top center;
       background-color: #0f0f11;
       display: flex;
-      overflow: hidden;
       will-change: transform;
     }
 
@@ -2648,42 +2656,36 @@ setInterval(updateClock, 1000);
   const cards = gsap.utils.toArray('.project-card');
   if (cards.length === 0) return;
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#projects',
-      start: 'top top',
-      end: '+=150%',
-      pin: true,
-      pinSpacing: true,
-      scrub: true,
-    }
-  });
-
   cards.forEach((card, index) => {
-    if (index < cards.length - 1) {
-      const nextCard = cards[index + 1];
-      const overlay = card.querySelector('.card-overlay');
-      const targetY = `-${(index + 1) * 85}vh`;
+    if (index === cards.length - 1) return; // Skip last card
 
-      // Next card slides up to cover current card
-      tl.to(nextCard, {
-        y: targetY,
+    const nextCard = cards[index + 1];
+    const overlay = card.querySelector('.card-overlay');
+
+    // Smoothly scale down card as next card enters and overlaps
+    gsap.to(card, {
+      scrollTrigger: {
+        trigger: nextCard,
+        start: 'top 85%',
+        end: 'top 15vh',
+        scrub: true,
+      },
+      scale: 0.9,
+      ease: 'none'
+    });
+
+    // Darken card via dimming overlay as next card overlaps
+    if (overlay) {
+      gsap.to(overlay, {
+        scrollTrigger: {
+          trigger: nextCard,
+          start: 'top 85%',
+          end: 'top 15vh',
+          scrub: true,
+        },
+        opacity: 0.65,
         ease: 'none'
-      }, index);
-
-      // Current card scales down slightly
-      tl.to(card, {
-        scale: 0.9,
-        ease: 'none'
-      }, index);
-
-      // Current card darkens via overlay
-      if (overlay) {
-        tl.to(overlay, {
-          opacity: 0.65,
-          ease: 'none'
-        }, index);
-      }
+      });
     }
   });
 })();
