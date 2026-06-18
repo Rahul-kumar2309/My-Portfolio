@@ -1010,8 +1010,7 @@
        PROJECTS SECTION (STACKED SCROLL CARDS)
        ============================================================ */
     #projects {
-      position: sticky;
-      top: 0;
+      position: relative;
       min-height: 100vh;
       z-index: 40;
       border-top-left-radius: 40px;
@@ -2649,7 +2648,9 @@ setInterval(updateClock, 1000);
     scrollTrigger: {
       trigger: '#projects',
       start: 'top top',
-      end: 'bottom bottom',
+      end: '+=150%',
+      pin: true,
+      pinSpacing: true,
       scrub: true,
     }
   });
