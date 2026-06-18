@@ -1455,6 +1455,8 @@
        ============================================================ */
     #contact {
       position: relative;
+      z-index: 60; /* Higher than #experience (z-index: 50) so it scrolls over it */
+      box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.35); /* Premium slide-over shadow */
       background-color: #0a0a0c;
       background-image: radial-gradient(circle at center, rgba(249, 115, 22, 0.05), transparent 70%);
       color: #ffffff;
