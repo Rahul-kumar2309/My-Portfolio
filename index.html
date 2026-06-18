@@ -381,7 +381,7 @@
       position: absolute;
       inset: 0;
       z-index: 0;
-      opacity: 0.07;
+      opacity: 0.25;
       pointer-events: none;
       overflow: hidden;
       animation: pcb-breathe 8s ease-in-out infinite;
@@ -393,8 +393,8 @@
 
     /* Slow opacity pulse — whole board breathes */
     @keyframes pcb-breathe {
-      0%, 100% { opacity: 0.05; }
-      50%       { opacity: 0.09; }
+      0%, 100% { opacity: 0.20; }
+      50%       { opacity: 0.30; }
     }
 
     /* Current flowing through main horizontal traces */
@@ -878,15 +878,15 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900"
          preserveAspectRatio="xMidYMid slice">
       <defs>
-        <!-- Warm dark-orange tone for all traces -->
+        <!-- Burnt-orange / copper tone for all traces, bolder and high contrast -->
         <style>
-          .tr { stroke:#3D1000; fill:none; }
-          .via-ring { stroke:#3D1000; fill:none; }
-          .via-dot  { fill:#3D1000; }
-          .ic-body  { stroke:#3D1000; fill:none; stroke-width:1.4; }
-          .ic-pin   { stroke:#3D1000; stroke-width:0.9; }
-          .smd      { stroke:#3D1000; fill:none; stroke-width:1; }
-          .label    { fill:#3D1000; font-family:monospace; font-size:7px;
+          .tr { stroke:#994d00; fill:none; }
+          .via-ring { stroke:#994d00; fill:none; }
+          .via-dot  { fill:#994d00; }
+          .ic-body  { stroke:#994d00; fill:none; stroke-width:2.2; }
+          .ic-pin   { stroke:#994d00; stroke-width:1.4; }
+          .smd      { stroke:#994d00; fill:none; stroke-width:1.6; }
+          .label    { fill:#994d00; font-family:monospace; font-size:8px; font-weight:bold;
                       letter-spacing:0.05em; }
         </style>
       </defs>
@@ -894,47 +894,47 @@
       <!-- ═══════════════════════════════════════════════════
            MAIN HORIZONTAL TRACES  (animated current flow)
       ═══════════════════════════════════════════════════ -->
-      <line class="tr pcb-flow-h"  stroke-width="1.4"
+      <line class="tr pcb-flow-h"  stroke-width="2.6"
             x1="0" y1="75"  x2="1440" y2="75"/>
-      <line class="tr pcb-flow-h2" stroke-width="1"
+      <line class="tr pcb-flow-h2" stroke-width="2.0"
             x1="0" y1="155" x2="1440" y2="155"/>
-      <line class="tr pcb-flow-h"  stroke-width="1.2"
+      <line class="tr pcb-flow-h"  stroke-width="2.4"
             x1="0" y1="300" x2="1440" y2="300"
             style="animation-delay:-2s"/>
-      <line class="tr pcb-flow-h2" stroke-width="0.9"
+      <line class="tr pcb-flow-h2" stroke-width="1.8"
             x1="0" y1="430" x2="1440" y2="430"
             style="animation-delay:-4s"/>
-      <line class="tr pcb-flow-h"  stroke-width="1.3"
+      <line class="tr pcb-flow-h"  stroke-width="2.5"
             x1="0" y1="570" x2="1440" y2="570"
             style="animation-delay:-1s"/>
-      <line class="tr pcb-flow-h2" stroke-width="1"
+      <line class="tr pcb-flow-h2" stroke-width="2.0"
             x1="0" y1="710" x2="1440" y2="710"
             style="animation-delay:-3.5s"/>
-      <line class="tr pcb-flow-h"  stroke-width="0.8"
+      <line class="tr pcb-flow-h"  stroke-width="1.8"
             x1="0" y1="830" x2="1440" y2="830"
             style="animation-delay:-0.5s"/>
 
       <!-- ═══════════════════════════════════════════════════
            MAIN VERTICAL TRACES
       ═══════════════════════════════════════════════════ -->
-      <line class="tr pcb-flow-v"  stroke-width="1.4"
+      <line class="tr pcb-flow-v"  stroke-width="2.6"
             x1="95"  y1="0" x2="95"  y2="900"/>
-      <line class="tr pcb-flow-v"  stroke-width="1"
+      <line class="tr pcb-flow-v"  stroke-width="2.0"
             x1="260" y1="0" x2="260" y2="900"
             style="animation-delay:-1.5s"/>
-      <line class="tr pcb-flow-v"  stroke-width="1.2"
+      <line class="tr pcb-flow-v"  stroke-width="2.4"
             x1="490" y1="0" x2="490" y2="900"
             style="animation-delay:-3s"/>
-      <line class="tr pcb-flow-v"  stroke-width="0.9"
+      <line class="tr pcb-flow-v"  stroke-width="1.8"
             x1="730" y1="0" x2="730" y2="900"
             style="animation-delay:-5s"/>
-      <line class="tr pcb-flow-v"  stroke-width="1.3"
+      <line class="tr pcb-flow-v"  stroke-width="2.5"
             x1="990" y1="0" x2="990" y2="900"
             style="animation-delay:-2s"/>
-      <line class="tr pcb-flow-v"  stroke-width="1"
+      <line class="tr pcb-flow-v"  stroke-width="2.0"
             x1="1230" y1="0" x2="1230" y2="900"
             style="animation-delay:-4s"/>
-      <line class="tr pcb-flow-v"  stroke-width="0.8"
+      <line class="tr pcb-flow-v"  stroke-width="1.8"
             x1="1400" y1="0" x2="1400" y2="900"
             style="animation-delay:-0.8s"/>
 
@@ -942,72 +942,136 @@
            45-DEGREE ROUTING TRACES  (elbow turns)
       ═══════════════════════════════════════════════════ -->
       <!-- Top-left network -->
-      <polyline class="tr pcb-flow-d" stroke-width="1.2"
+      <polyline class="tr pcb-flow-d" stroke-width="2.2"
         points="0,155  95,155  130,120  260,120  260,75"/>
-      <polyline class="tr pcb-flow-d" stroke-width="1"
+      <polyline class="tr pcb-flow-d" stroke-width="2.0"
         points="95,300  180,300  220,260  260,260  260,300"
         style="animation-delay:-1s"/>
       <!-- Mid network -->
-      <polyline class="tr pcb-flow-d" stroke-width="1.2"
+      <polyline class="tr pcb-flow-d" stroke-width="2.2"
         points="490,155  560,155  600,195  730,195  730,155"
         style="animation-delay:-2s"/>
-      <polyline class="tr pcb-flow-d" stroke-width="1"
+      <polyline class="tr pcb-flow-d" stroke-width="2.0"
         points="490,430  555,430  600,385  730,385  730,300"
         style="animation-delay:-3s"/>
+      <polyline class="tr pcb-flow-d" stroke-width="2.2"
+        points="260,120  330,120  370,160  490,160"/>
+      <polyline class="tr pcb-flow-d" stroke-width="2.0"
+        points="490,570  550,570  590,610  730,610"
+        style="animation-delay:-2.5s"/>
+      <polyline class="tr pcb-flow-d" stroke-width="2.0"
+        points="730,430  800,430  840,470  990,470"
+        style="animation-delay:-1.2s"/>
+
       <!-- Right network -->
-      <polyline class="tr pcb-flow-d" stroke-width="1.2"
+      <polyline class="tr pcb-flow-d" stroke-width="2.2"
         points="990,300  1050,300  1090,260  1230,260  1230,155"
         style="animation-delay:-1.5s"/>
-      <polyline class="tr pcb-flow-d" stroke-width="1"
+      <polyline class="tr pcb-flow-d" stroke-width="2.0"
         points="990,570  1055,570  1095,530  1230,530  1230,430"
         style="animation-delay:-4s"/>
+      <polyline class="tr pcb-flow-d" stroke-width="2.2"
+        points="990,75  1050,75  1090,115  1230,115"/>
+
       <!-- Bottom network -->
-      <polyline class="tr pcb-flow-d" stroke-width="1.1"
+      <polyline class="tr pcb-flow-d" stroke-width="2.0"
         points="95,710  160,710  200,670  260,670  260,570"
         style="animation-delay:-2.5s"/>
-      <polyline class="tr pcb-flow-d" stroke-width="1"
+      <polyline class="tr pcb-flow-d" stroke-width="2.0"
         points="730,710  800,710  840,750  990,750  990,710"
         style="animation-delay:-0.5s"/>
+
+      <!-- Bottom-Right Parallel Bus (Data Bus) -->
+      <polyline class="tr pcb-flow-d" stroke-width="2.0"
+        points="730,780  840,780  880,820  1230,820"/>
+      <polyline class="tr pcb-flow-d" stroke-width="2.0"
+        points="730,795  835,795  870,830  1230,830"
+        style="animation-delay:-1s"/>
+      <polyline class="tr pcb-flow-d" stroke-width="2.0"
+        points="730,810  830,810  860,840  1230,840"
+        style="animation-delay:-2s"/>
 
       <!-- ═══════════════════════════════════════════════════
            VIA PADS  (ring + drill hole)
       ═══════════════════════════════════════════════════ -->
-      <!-- Macro to repeat: outer ring r=6, inner dot r=2.2 -->
       <g>
         <!-- Row 1 -->
-        <circle class="via-ring" stroke-width="1.4" cx="95"  cy="75"  r="6"/><circle class="via-dot" cx="95"  cy="75"  r="2.2"/>
-        <circle class="via-ring" stroke-width="1.4" cx="260" cy="75"  r="6"/><circle class="via-dot" cx="260" cy="75"  r="2.2"/>
-        <circle class="via-ring" stroke-width="1.4" cx="490" cy="75"  r="6"/><circle class="via-dot" cx="490" cy="75"  r="2.2"/>
-        <circle class="via-ring" stroke-width="1.4" cx="730" cy="155" r="6"/><circle class="via-dot" cx="730" cy="155" r="2.2"/>
-        <circle class="via-ring" stroke-width="1.4" cx="990" cy="155" r="6"/><circle class="via-dot" cx="990" cy="155" r="2.2"/>
-        <circle class="via-ring" stroke-width="1.4" cx="1230" cy="75" r="6"/><circle class="via-dot" cx="1230" cy="75" r="2.2"/>
+        <circle class="via-ring" stroke-width="2.0" cx="95"  cy="75"  r="7"/><circle class="via-dot" cx="95"  cy="75"  r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="260" cy="75"  r="7"/><circle class="via-dot" cx="260" cy="75"  r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="490" cy="75"  r="7"/><circle class="via-dot" cx="490" cy="75"  r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="730" cy="155" r="7"/><circle class="via-dot" cx="730" cy="155" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="990" cy="155" r="7"/><circle class="via-dot" cx="990" cy="155" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="1230" cy="75" r="7"/><circle class="via-dot" cx="1230" cy="75" r="2.8"/>
         <!-- Row 2 -->
-        <circle class="via-ring" stroke-width="1.4" cx="95"  cy="300" r="6"/><circle class="via-dot" cx="95"  cy="300" r="2.2"/>
-        <circle class="via-ring" stroke-width="1.4" cx="260" cy="300" r="6"/><circle class="via-dot" cx="260" cy="300" r="2.2"/>
-        <circle class="via-ring" stroke-width="1.4" cx="490" cy="300" r="6"/><circle class="via-dot" cx="490" cy="300" r="2.2"/>
-        <circle class="via-ring" stroke-width="1.4" cx="730" cy="300" r="6"/><circle class="via-dot" cx="730" cy="300" r="2.2"/>
-        <circle class="via-ring" stroke-width="1.4" cx="990" cy="300" r="6"/><circle class="via-dot" cx="990" cy="300" r="2.2"/>
+        <circle class="via-ring" stroke-width="2.0" cx="95"  cy="300" r="7"/><circle class="via-dot" cx="95"  cy="300" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="260" cy="300" r="7"/><circle class="via-dot" cx="260" cy="300" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="490" cy="300" r="7"/><circle class="via-dot" cx="490" cy="300" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="730" cy="300" r="7"/><circle class="via-dot" cx="730" cy="300" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="990" cy="300" r="7"/><circle class="via-dot" cx="990" cy="300" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="1230" cy="300" r="7"/><circle class="via-dot" cx="1230" cy="300" r="2.8"/>
         <!-- Row 3 -->
-        <circle class="via-ring" stroke-width="1.4" cx="260" cy="570" r="6"/><circle class="via-dot" cx="260" cy="570" r="2.2"/>
-        <circle class="via-ring" stroke-width="1.4" cx="490" cy="430" r="6"/><circle class="via-dot" cx="490" cy="430" r="2.2"/>
-        <circle class="via-ring" stroke-width="1.4" cx="730" cy="570" r="6"/><circle class="via-dot" cx="730" cy="570" r="2.2"/>
-        <circle class="via-ring" stroke-width="1.4" cx="990" cy="710" r="6"/><circle class="via-dot" cx="990" cy="710" r="2.2"/>
-        <circle class="via-ring" stroke-width="1.4" cx="1230" cy="570" r="6"/><circle class="via-dot" cx="1230" cy="570" r="2.2"/>
+        <circle class="via-ring" stroke-width="2.0" cx="260" cy="570" r="7"/><circle class="via-dot" cx="260" cy="570" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="490" cy="430" r="7"/><circle class="via-dot" cx="490" cy="430" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="730" cy="570" r="7"/><circle class="via-dot" cx="730" cy="570" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="990" cy="710" r="7"/><circle class="via-dot" cx="990" cy="710" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="1230" cy="570" r="7"/><circle class="via-dot" cx="1230" cy="570" r="2.8"/>
         <!-- Row 4 -->
-        <circle class="via-ring" stroke-width="1.4" cx="95"  cy="710" r="6"/><circle class="via-dot" cx="95"  cy="710" r="2.2"/>
-        <circle class="via-ring" stroke-width="1.4" cx="730" cy="710" r="6"/><circle class="via-dot" cx="730" cy="710" r="2.2"/>
-        <circle class="via-ring" stroke-width="1.4" cx="1230" cy="710" r="6"/><circle class="via-dot" cx="1230" cy="710" r="2.2"/>
+        <circle class="via-ring" stroke-width="2.0" cx="95"  cy="710" r="7"/><circle class="via-dot" cx="95"  cy="710" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="730" cy="710" r="7"/><circle class="via-dot" cx="730" cy="710" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="1230" cy="710" r="7"/><circle class="via-dot" cx="1230" cy="710" r="2.8"/>
+        <!-- New dense vias -->
+        <circle class="via-ring" stroke-width="2.0" cx="260" cy="260" r="7"/><circle class="via-dot" cx="260" cy="260" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="260" cy="500" r="7"/><circle class="via-dot" cx="260" cy="500" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="490" cy="160" r="7"/><circle class="via-dot" cx="490" cy="160" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="730" cy="610" r="7"/><circle class="via-dot" cx="730" cy="610" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="990" cy="470" r="7"/><circle class="via-dot" cx="990" cy="470" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="1230" cy="115" r="7"/><circle class="via-dot" cx="1230" cy="115" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="1230" cy="820" r="7"/><circle class="via-dot" cx="1230" cy="820" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="1230" cy="830" r="7"/><circle class="via-dot" cx="1230" cy="830" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="1230" cy="840" r="7"/><circle class="via-dot" cx="1230" cy="840" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="400" cy="430" r="7"/><circle class="via-dot" cx="400" cy="430" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="600" cy="75"  r="7"/><circle class="via-dot" cx="600" cy="75"  r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="850" cy="155" r="7"/><circle class="via-dot" cx="850" cy="155" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="1150" cy="430" r="7"/><circle class="via-dot" cx="1150" cy="430" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="1350" cy="710" r="7"/><circle class="via-dot" cx="1350" cy="710" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="260" cy="120" r="7"/><circle class="via-dot" cx="260" cy="120" r="2.8"/>
+        <circle class="via-ring" stroke-width="2.0" cx="990" cy="75"  r="7"/><circle class="via-dot" cx="990" cy="75"  r="2.8"/>
       </g>
 
       <!-- ═══════════════════════════════════════════════════
-           IC CHIP  —  large MCU (centre-left)
-           Body 100x70, 8 pins per side
+           SOLID JUNCTION DOTS (Where traces merge/split)
       ═══════════════════════════════════════════════════ -->
+      <g fill="#994d00">
+        <circle cx="95"   cy="155" r="3.5"/>
+        <circle cx="95"   cy="300" r="3.5"/>
+        <circle cx="260"  cy="155" r="3.5"/>
+        <circle cx="260"  cy="300" r="3.5"/>
+        <circle cx="490"  cy="155" r="3.5"/>
+        <circle cx="490"  cy="300" r="3.5"/>
+        <circle cx="490"  cy="430" r="3.5"/>
+        <circle cx="730"  cy="155" r="3.5"/>
+        <circle cx="730"  cy="300" r="3.5"/>
+        <circle cx="730"  cy="430" r="3.5"/>
+        <circle cx="730"  cy="570" r="3.5"/>
+        <circle cx="730"  cy="710" r="3.5"/>
+        <circle cx="990"  cy="300" r="3.5"/>
+        <circle cx="990"  cy="430" r="3.5"/>
+        <circle cx="990"  cy="570" r="3.5"/>
+        <circle cx="990"  cy="710" r="3.5"/>
+        <circle cx="1230" cy="155" r="3.5"/>
+        <circle cx="1230" cy="300" r="3.5"/>
+        <circle cx="1230" cy="430" r="3.5"/>
+        <circle cx="1230" cy="570" r="3.5"/>
+        <circle cx="1230" cy="710" r="3.5"/>
+      </g>
+
+      <!-- ═══════════════════════════════════════════════════
+           IC CHIPS  (Hardware routing microchips)
+      ═══════════════════════════════════════════════════ -->
+      <!-- IC CHIP  —  large MCU (centre-left) -->
       <g transform="translate(155,330)">
-        <!-- Body -->
         <rect class="ic-body" x="0" y="0" width="105" height="72" rx="4"/>
-        <!-- Pin-1 notch -->
-        <circle class="ic-body" cx="8" cy="8" r="3" stroke-width="1"/>
+        <circle class="ic-body" cx="8" cy="8" r="3" stroke-width="1.2"/>
         <!-- Left pins -->
         <line class="ic-pin" x1="-14" y1="9"  x2="0" y2="9" />
         <line class="ic-pin" x1="-14" y1="18" x2="0" y2="18"/>
@@ -1038,14 +1102,18 @@
         <line class="ic-pin" x1="56"  y1="72" x2="56"  y2="86"/>
         <line class="ic-pin" x1="70"  y1="72" x2="70"  y2="86"/>
         <line class="ic-pin" x1="84"  y1="72" x2="84"  y2="86"/>
-        <!-- Label -->
-        <text class="label" x="12" y="40">MCU</text>
+        <text class="label" x="12" y="40">MCU-ESP32</text>
       </g>
+
+      <!-- MCU custom pin routes -->
+      <line class="tr" stroke-width="1.8" x1="141" y1="348" x2="95" y2="348"/>
+      <polyline class="tr" stroke-width="1.8" points="197,402 197,450 247,500 260,500"/>
+      <polyline class="tr" stroke-width="1.8" points="211,316 211,280 231,260 260,260"/>
 
       <!-- IC CHIP  —  small IC top-right area -->
       <g transform="translate(1050,80)">
         <rect class="ic-body" x="0" y="0" width="72" height="50" rx="3"/>
-        <circle class="ic-body" cx="6" cy="6" r="2.5" stroke-width="1"/>
+        <circle class="ic-body" cx="6" cy="6" r="2.5" stroke-width="1.2"/>
         <!-- Left pins -->
         <line class="ic-pin" x1="-10" y1="8"  x2="0" y2="8" />
         <line class="ic-pin" x1="-10" y1="19" x2="0" y2="19"/>
@@ -1056,30 +1124,86 @@
         <line class="ic-pin" x1="72" y1="19" x2="82" y2="19"/>
         <line class="ic-pin" x1="72" y1="30" x2="82" y2="30"/>
         <line class="ic-pin" x1="72" y1="41" x2="82" y2="41"/>
-        <text class="label" x="10" y="29">IC1</text>
+        <text class="label" x="10" y="29">DAC-8bit</text>
       </g>
 
       <!-- IC CHIP  —  medium IC bottom-right -->
       <g transform="translate(1060,600)">
         <rect class="ic-body" x="0" y="0" width="86" height="60" rx="3"/>
-        <circle class="ic-body" cx="7" cy="7" r="2.5" stroke-width="1"/>
+        <circle class="ic-body" cx="7" cy="7" r="2.5" stroke-width="1.2"/>
+        <!-- Left pins -->
         <line class="ic-pin" x1="-12" y1="10" x2="0"  y2="10"/>
         <line class="ic-pin" x1="-12" y1="22" x2="0"  y2="22"/>
         <line class="ic-pin" x1="-12" y1="34" x2="0"  y2="34"/>
         <line class="ic-pin" x1="-12" y1="46" x2="0"  y2="46"/>
+        <!-- Right pins -->
         <line class="ic-pin" x1="86"  y1="10" x2="98" y2="10"/>
         <line class="ic-pin" x1="86"  y1="22" x2="98" y2="22"/>
         <line class="ic-pin" x1="86"  y1="34" x2="98" y2="34"/>
         <line class="ic-pin" x1="86"  y1="46" x2="98" y2="46"/>
+        <!-- Top pins -->
         <line class="ic-pin" x1="14"  y1="-12" x2="14"  y2="0"/>
         <line class="ic-pin" x1="30"  y1="-12" x2="30"  y2="0"/>
         <line class="ic-pin" x1="46"  y1="-12" x2="46"  y2="0"/>
         <line class="ic-pin" x1="62"  y1="-12" x2="62"  y2="0"/>
-        <text class="label" x="14" y="35">IC2</text>
+        <text class="label" x="14" y="35">FPGA-Spartan</text>
       </g>
 
       <!-- ═══════════════════════════════════════════════════
-           SMD RESISTORS  (rectangular body, two end pads)
+           OTHER HARDWARE COMPONENTS (Crystal, Transistor, Inductor)
+      ═══════════════════════════════════════════════════ -->
+      <!-- Crystal Oscillator Y1 near MCU -->
+      <g transform="translate(310,360)">
+        <rect class="smd" x="0" y="0" width="18" height="24" rx="2"/>
+        <line class="smd" x1="4" y1="4" x2="14" y2="4"/>
+        <line class="smd" x1="4" y1="20" x2="14" y2="20"/>
+        <line class="smd" x1="-8" y1="12" x2="0" y2="12"/>
+        <line class="smd" x1="18" y1="12" x2="26" y2="12"/>
+        <text class="label" x="2" y="-4">Y1 (16MHz)</text>
+      </g>
+
+      <!-- Transistor Q1 SOT-23 -->
+      <g transform="translate(480,520)">
+        <polyline class="smd" points="0,0 12,0 12,16 0,16 0,0"/>
+        <line class="smd" x1="-8" y1="8" x2="0" y2="8"/>
+        <line class="smd" x1="12" y1="4" x2="20" y2="4"/>
+        <line class="smd" x1="12" y1="12" x2="20" y2="12"/>
+        <text class="label" x="-2" y="-4">Q1</text>
+      </g>
+
+      <!-- Inductor L1 -->
+      <g transform="translate(680,422)">
+        <rect class="smd" x="0" y="0" width="24" height="16" rx="4"/>
+        <path class="smd" d="M2,8 C2,2 6,2 6,8 C6,2 10,2 10,8 C10,2 14,2 14,8 C14,2 18,2 18,8 C18,2 22,2 22,8" fill="none"/>
+        <line class="smd" x1="-8" y1="8" x2="0" y2="8"/>
+        <line class="smd" x1="24" y1="8" x2="32" y2="8"/>
+        <text class="label" x="4" y="-4">L1 (4.7uH)</text>
+      </g>
+
+      <!-- Test Points (Pads with probe accessibility) -->
+      <g transform="translate(400,155)">
+        <circle cx="0" cy="0" r="4.5" fill="#994d00"/>
+        <circle cx="0" cy="0" r="7" stroke="#994d00" fill="none" stroke-width="1.8"/>
+        <text class="label" x="9" y="3">TP1_GND</text>
+      </g>
+      <g transform="translate(650,710)">
+        <circle cx="0" cy="0" r="4.5" fill="#994d00"/>
+        <circle cx="0" cy="0" r="7" stroke="#994d00" fill="none" stroke-width="1.8"/>
+        <text class="label" x="9" y="3">TP2_VCC</text>
+      </g>
+      <g transform="translate(900,300)">
+        <circle cx="0" cy="0" r="4.5" fill="#994d00"/>
+        <circle cx="0" cy="0" r="7" stroke="#994d00" fill="none" stroke-width="1.8"/>
+        <text class="label" x="9" y="3">TP3_TX</text>
+      </g>
+      <g transform="translate(1330,155)">
+        <circle cx="0" cy="0" r="4.5" fill="#994d00"/>
+        <circle cx="0" cy="0" r="7" stroke="#994d00" fill="none" stroke-width="1.8"/>
+        <text class="label" x="9" y="3">TP4_RX</text>
+      </g>
+
+      <!-- ═══════════════════════════════════════════════════
+           SMD RESISTORS & CAPACITORS
       ═══════════════════════════════════════════════════ -->
       <!-- R1: on horizontal trace y=75 -->
       <g transform="translate(330,68)">
@@ -1102,14 +1226,28 @@
         <line class="smd" x1="30" y1="7" x2="38" y2="7"/>
         <text class="label" x="6" y="10">R3</text>
       </g>
+      <!-- R4: on horizontal-diagonal trace y=260 -->
+      <g transform="translate(1150,253)">
+        <rect class="smd" x="0" y="0" width="30" height="14" rx="2"/>
+        <line class="smd" x1="-8" y1="7" x2="0"  y2="7"/>
+        <line class="smd" x1="30" y1="7" x2="38" y2="7"/>
+        <text class="label" x="6" y="10">R4</text>
+      </g>
+      <!-- R5: on horizontal-diagonal trace y=530 -->
+      <g transform="translate(1150,523)">
+        <rect class="smd" x="0" y="0" width="30" height="14" rx="2"/>
+        <line class="smd" x1="-8" y1="7" x2="0"  y2="7"/>
+        <line class="smd" x1="30" y1="7" x2="38" y2="7"/>
+        <text class="label" x="6" y="10">R5</text>
+      </g>
 
-      <!-- SMD CAPACITORS  (two parallel lines) -->
       <!-- C1: on vertical trace x=490 -->
       <g transform="translate(483,210)">
         <line class="smd" x1="7" y1="0"  x2="7" y2="8"/>
         <line class="smd" x1="0" y1="8"  x2="14" y2="8"/>
         <line class="smd" x1="0" y1="12" x2="14" y2="12"/>
         <line class="smd" x1="7" y1="12" x2="7" y2="20"/>
+        <text class="label" x="-16" y="14">C1</text>
       </g>
       <!-- C2: on vertical trace x=990 -->
       <g transform="translate(983,490)">
@@ -1117,6 +1255,23 @@
         <line class="smd" x1="0" y1="8"  x2="14" y2="8"/>
         <line class="smd" x1="0" y1="12" x2="14" y2="12"/>
         <line class="smd" x1="7" y1="12" x2="7" y2="20"/>
+        <text class="label" x="-16" y="14">C2</text>
+      </g>
+      <!-- C3: on vertical trace x=260 -->
+      <g transform="translate(253,200)">
+        <line class="smd" x1="7" y1="0"  x2="7" y2="8"/>
+        <line class="smd" x1="0" y1="8"  x2="14" y2="8"/>
+        <line class="smd" x1="0" y1="12" x2="14" y2="12"/>
+        <line class="smd" x1="7" y1="12" x2="7" y2="20"/>
+        <text class="label" x="-16" y="14">C3</text>
+      </g>
+      <!-- C4: on vertical trace x=1230 -->
+      <g transform="translate(1223,350)">
+        <line class="smd" x1="7" y1="0"  x2="7" y2="8"/>
+        <line class="smd" x1="0" y1="8"  x2="14" y2="8"/>
+        <line class="smd" x1="0" y1="12" x2="14" y2="12"/>
+        <line class="smd" x1="7" y1="12" x2="7" y2="20"/>
+        <text class="label" x="-16" y="14">C4</text>
       </g>
 
       <!-- ═══════════════════════════════════════════════════
@@ -1137,49 +1292,49 @@
         <circle class="smd" cx="21" cy="56" r="2.5"/>
         <circle class="smd" cx="7"  cy="68" r="2.5"/>
         <circle class="smd" cx="21" cy="68" r="2.5"/>
-        <text class="label" x="2" y="-4">J1</text>
+        <text class="label" x="2" y="-4">J1 (DEBUG)</text>
       </g>
 
       <!-- ═══════════════════════════════════════════════════
            CORNER FIDUCIAL MARKS  (alignment targets)
       ═══════════════════════════════════════════════════ -->
-      <g stroke="#3D1000" fill="none" stroke-width="1.2">
+      <g stroke="#994d00" fill="none" stroke-width="1.8">
         <!-- TL -->
-        <circle cx="40" cy="40" r="8"/>
-        <circle cx="40" cy="40" r="3"/>
-        <line x1="26" y1="40" x2="32" y2="40"/>
-        <line x1="48" y1="40" x2="54" y2="40"/>
-        <line x1="40" y1="26" x2="40" y2="32"/>
-        <line x1="40" y1="48" x2="40" y2="54"/>
+        <circle cx="40" cy="40" r="9"/>
+        <circle cx="40" cy="40" r="3.5"/>
+        <line x1="24" y1="40" x2="31" y2="40"/>
+        <line x1="49" y1="40" x2="56" y2="40"/>
+        <line x1="40" y1="24" x2="40" y2="31"/>
+        <line x1="40" y1="49" x2="40" y2="56"/>
         <!-- TR -->
-        <circle cx="1400" cy="40" r="8"/>
-        <circle cx="1400" cy="40" r="3"/>
-        <line x1="1386" y1="40" x2="1392" y2="40"/>
-        <line x1="1408" y1="40" x2="1414" y2="40"/>
-        <line x1="1400" y1="26" x2="1400" y2="32"/>
-        <line x1="1400" y1="48" x2="1400" y2="54"/>
+        <circle cx="1400" cy="40" r="9"/>
+        <circle cx="1400" cy="40" r="3.5"/>
+        <line x1="1384" y1="40" x2="1391" y2="40"/>
+        <line x1="1409" y1="40" x2="1416" y2="40"/>
+        <line x1="1400" y1="24" x2="1400" y2="31"/>
+        <line x1="1400" y1="49" x2="1400" y2="56"/>
         <!-- BL -->
-        <circle cx="40" cy="860" r="8"/>
-        <circle cx="40" cy="860" r="3"/>
-        <line x1="26" y1="860" x2="32" y2="860"/>
-        <line x1="48" y1="860" x2="54" y2="860"/>
-        <line x1="40" y1="846" x2="40" y2="852"/>
-        <line x1="40" y1="868" x2="40" y2="874"/>
+        <circle cx="40" cy="860" r="9"/>
+        <circle cx="40" cy="860" r="3.5"/>
+        <line x1="24" y1="860" x2="31" y2="860"/>
+        <line x1="49" y1="860" x2="56" y2="860"/>
+        <line x1="40" y1="844" x2="40" y2="851"/>
+        <line x1="40" y1="869" x2="40" y2="876"/>
         <!-- BR -->
-        <circle cx="1400" cy="860" r="8"/>
-        <circle cx="1400" cy="860" r="3"/>
-        <line x1="1386" y1="860" x2="1392" y2="860"/>
-        <line x1="1408" y1="860" x2="1414" y2="860"/>
-        <line x1="1400" y1="846" x2="1400" y2="852"/>
-        <line x1="1400" y1="868" x2="1400" y2="874"/>
+        <circle cx="1400" cy="860" r="9"/>
+        <circle cx="1400" cy="860" r="3.5"/>
+        <line x1="1384" y1="860" x2="1391" y2="860"/>
+        <line x1="1409" y1="860" x2="1416" y2="860"/>
+        <line x1="1400" y1="844" x2="1400" y2="851"/>
+        <line x1="1400" y1="869" x2="1400" y2="876"/>
       </g>
 
       <!-- ═══════════════════════════════════════════════════
            BOARD EDGE  (PCB outline)
       ═══════════════════════════════════════════════════ -->
       <rect x="12" y="12" width="1416" height="876" rx="6"
-            fill="none" stroke="#3D1000" stroke-width="1.6"
-            stroke-dasharray="8 4"/>
+            fill="none" stroke="#994d00" stroke-width="2.8"
+            stroke-dasharray="12 6"/>
 
     </svg>
   </div>
@@ -1499,7 +1654,7 @@ setInterval(updateClock, 1000);
 
   tl
     /* 1. PCB background fades in — circuit powering on */
-    .to('#about-pcb',         { opacity: 0.07, duration: 1.4 })
+    .to('#about-pcb',         { opacity: 0.25, duration: 1.4 })
     /* 2. Top bar + sidebar slide in */
     .to('#ab-topbar',         { opacity: 1, y: 0, duration: 0.7 }, '-=1.0')
     .to('#ab-sidebar',        { opacity: 1, x: 0, duration: 0.7 }, '<')
